@@ -4,36 +4,50 @@ require_relative 'printer'
 printer = Printer.new
 
 printer.greeting
-input = gets.chomp
+
 exit_game = false
 
 until exit_game == true
 
-  if input == 'p'
-    printer.play_intro
+  main_menu = false
+  printer.main_menu
+  input = gets.chomp
 
+  until main_menu == true
+
+
+    if input == 'p' || 'play'
+      printer.play_intro
       mastermind = Mastermind.new
-      response = nil
       mastermind.secret_code
 
+        response = nil
 
-      until response && response.status == :won
-        print "> "
-        input = gets.chomp
-        response = mastermind.input_parser(input)
-        puts response.message
-      end
-      puts "Goodbye!"
+        until response && response.status == :won
+          print "> "
+          input = gets.chomp
+          response = mastermind.input_parser(input)
+          puts response.message
+        end
+        printer.goodbye
+        response.status
+        main_menu = true
+        exit_game = true
 
-  elsif input == "i"
-    printer.instructions
 
-  elsif input == "q"
-    printer.goodbye
-    exit_game == true
+    elsif input == 'i' || 'instructions'
+      printer.instructions
+      main_menu = true
 
-  else
-    printer.error_message
+    elsif input == 'q' || 'quit'
+      printer.goodbye
+      main_menu = true
+      exit_game = true
 
+    else
+      printer.error_message
+      main_menu = true
+
+    end
   end
 end

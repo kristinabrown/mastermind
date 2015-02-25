@@ -2,64 +2,53 @@ require_relative 'response'
 
 class Mastermind
 
-  attr_reader :secret, :spot_count, :char_count
+  attr_reader :secret, :spot_count, :char_count, :turn_count
 
   def initialize
-    @secret = secret
+    @secret = secret_code
+    @turn_count = 0
   end
 
 
   def secret_code
-    @colors = ["R", "Y", "B", "G"]
-    @secret = []
-    @colors.map do |x|
-      @secret << @colors.shuffle.first
-    end
-    @secret = @secret.join
-    puts @secret
+    colors = ["R", "Y", "B", "G"]
+    colors.map do |x|
+      colors.shuffle.first
+    end.join
   end
 
+  def secret_code_for_tests
+    @secret = "YGGB"
+  end
 
+  def guess_counter
+    @turn_count += 1
+  end
 
 
   def execute(input)
     if input == @secret
-      Response.new(:message => "You win!", :status => :won)
+      guess_counter
+      Response.new(:message => "You win! You guessed the sequence '#{@secret}' in #{@turn_count} guesses.", :status => :won)
     else
-      eval_spot(input)
-      eval_char(input)
-      Response.new(:message => "#{input} has #{@char_count} of the correct elements, with #{@spot_count} in the right correct position", :status => :continue)
+      guess_counter
+      spot_count = eval_spot(input)
+      char_count = eval_char(input)
+      Response.new(:message => "#{input} has #{char_count} of the correct colors, with #{spot_count} in the correct position.\nYou've taken #{@turn_count}", :status => :continue)
     end
   end
 
   def eval_char(input)
-    "you have some correct"
-    @char_count = 2
-    # @secret = "YGGB"
-    # secret_ary = @secret.chars
-    # @char_count = 0
-    # input.chars.each do |x|
-    #      secret_ary.any? do |num|
-    #       if x == num
-    #         @char_count += 1
-    #         num.
-    #       end
-    #     end
-    # end
-    # @char_count
+    4 - (@secret.chars - input.chars).count
   end
 
 
   def eval_spot(input)
-    @spot_count = 0
     input_ary = input.chars
-    combo = @secret.chars.zip(input_ary)
-    combo.map do |set|
-      if set[0] == set[1]
-        @spot_count += 1
-      end
+    like_items = @secret.chars.zip(input_ary).select do |element|
+      element[0] == element [1]
     end
-    Response.new(:message => "#{@spot_count} in correct position", :status => :continue)
+    like_items.count
   end
 
   def input_parser(input)
@@ -79,7 +68,8 @@ end
 mm = Mastermind.new
 
 mastermind = Mastermind.new
-mastermind.secret_code
-input = "yfdR"
-mastermind.eval_char(input)
-mastermind.eval_spot(input)
+mastermind.secret_code_for_tests
+input = "YBBR"
+mastermind.input_parser(input)
+mastermind.input_parser(input)
+mastermind.turn_count

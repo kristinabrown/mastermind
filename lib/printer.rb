@@ -3,6 +3,9 @@ class Printer
 
   def greeting
     puts "Welcome to Mastermind"
+  end
+
+  def main_menu
     puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
   end
 
@@ -13,16 +16,23 @@ What's your guess?"
   end
 
   def instructions
-    "instructions"
+    puts "instructions"
   end
-
+  
   def goodbye
-    "until we meet again"
+    puts "until we meet again"
   end
 
   def error_message
-    "please enter 'p' to play, 'q' to quit, or 'i' for instructions"
+    puts "please enter 'p' to play, 'q' to quit, or 'i' for instructions"
   end
-
+# # def test_it_has_the_expected_messages
+#   expected = [:welcome, :wrong_guess, :you_win]
+#
+#   printer = Printer.new
+#   expected.each do |message|
+#     assert printer.respond_to?(message), "Printer should have a #{message} method"
+#   end
+# end
 
 end
