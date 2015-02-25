@@ -16,23 +16,18 @@ What's your guess?"
   end
 
   def instructions
-    puts "instructions"
+    puts "When you start a game a random 4-character-combination of (R)ed, (G)reen,
+(B)lue, and (Yellow) is created (ex. RRYB). You have to guess the sequence. With
+each guess you will be told how many colors are correct, and how many are in the
+correct position. Good Luck!"
   end
-  
+
   def goodbye
-    puts "until we meet again"
+    puts "Come back any time!"
   end
 
   def error_message
     puts "please enter 'p' to play, 'q' to quit, or 'i' for instructions"
   end
-# # def test_it_has_the_expected_messages
-#   expected = [:welcome, :wrong_guess, :you_win]
-#
-#   printer = Printer.new
-#   expected.each do |message|
-#     assert printer.respond_to?(message), "Printer should have a #{message} method"
-#   end
-# end
 
 end

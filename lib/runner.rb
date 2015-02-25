@@ -15,31 +15,29 @@ until exit_game == true
 
   until main_menu == true
 
-
-    if input == 'p' || 'play'
+    if input == 'p' || input == 'play'
       printer.play_intro
       mastermind = Mastermind.new
       mastermind.secret_code
 
-        response = nil
+          response = nil
 
-        until response && response.status == :won
-          print "> "
-          input = gets.chomp
-          response = mastermind.input_parser(input)
-          puts response.message
-        end
-        printer.goodbye
-        response.status
-        main_menu = true
-        exit_game = true
+          until response && response.status == :won
+            print "> "
+            input = gets.chomp
+            response = mastermind.input_parser(input)
+            puts response.message
+          end
+          printer.goodbye
+          response.status
+          main_menu = true
+          exit_game = true
 
-
-    elsif input == 'i' || 'instructions'
+    elsif input == 'i' || input == 'instructions'
       printer.instructions
       main_menu = true
 
-    elsif input == 'q' || 'quit'
+    elsif input == 'q' || input == 'quit'
       printer.goodbye
       main_menu = true
       exit_game = true
@@ -47,7 +45,6 @@ until exit_game == true
     else
       printer.error_message
       main_menu = true
-
     end
   end
 end
