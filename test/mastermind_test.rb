@@ -16,7 +16,14 @@ class MastermindTest < Minitest::Test
     assert mastermind.respond_to?(secret_code)
   end
 
-  def test_it_can_respond_how_many_of_the_elements_are_correct
+  def test_can_break_up_the_input_in_a_hash_based_on_color
+    skip
+    mastermind = Mastermind.new
+    input = "YYGR"
+    assert.equal "YYGR", mastermind.hasher_method(input)
+  end
+
+  def test_it_can_respond_how_many_of_the_colors_are_correct
     #secret code = YGGB
     mastermind = Mastermind.new
     mastermind.secret_code_for_tests(1)
@@ -24,7 +31,7 @@ class MastermindTest < Minitest::Test
     assert_equal 2, mastermind.eval_char(input)
   end
 
-  def test_it_can_respond_how_many_of_the_elements_are_correct_when_input_is_one_color
+  def test_it_can_respond_how_many_of_the_colors_are_correct_when_input_is_one_color
     #secret code = YGGB
     mastermind = Mastermind.new
     mastermind.secret_code_for_tests(1)
@@ -32,7 +39,7 @@ class MastermindTest < Minitest::Test
     assert_equal 2, mastermind.eval_char(input)
   end
 
-  def test_it_can_respond_how_many_of_the_elements_are_correct_when_secret_is_one_color
+  def test_it_can_respond_how_many_of_the_colors_are_correct_when_secret_is_one_color
     #secret code = YYYY
     mastermind = Mastermind.new
     mastermind.secret_code_for_tests(2)
@@ -40,7 +47,7 @@ class MastermindTest < Minitest::Test
     assert_equal 2, mastermind.eval_char(input)
   end
 
-  def test_it_can_respond_how_many_of_the_elements_are_correct
+  def test_it_can_respond_how_many_of_the_colors_are_correct
     #secret code = YGGB
     mastermind = Mastermind.new
     mastermind.secret_code_for_tests(1)
@@ -48,7 +55,7 @@ class MastermindTest < Minitest::Test
     assert_equal 2, mastermind.eval_char(input)
   end
 
-  def test_it_can_respond_how_many_elements_are_in_the_correct_position
+  def test_it_can_respond_how_many_colors_are_in_the_correct_position
     #secret code = YGGB
     mastermind = Mastermind.new
     mastermind.secret_code_for_tests(1)
@@ -56,7 +63,7 @@ class MastermindTest < Minitest::Test
     assert_equal 2, mastermind.eval_spot(input)
   end
 
-  def test_it_can_respond_how_many_elements_are_in_different_correct_positions
+  def test_it_can_respond_how_many_colors_are_in_different_correct_positions
     #secret code = YYYY
     mastermind = Mastermind.new
     mastermind.secret_code_for_tests(2)
@@ -64,7 +71,7 @@ class MastermindTest < Minitest::Test
     assert_equal 1, mastermind.eval_spot(input)
   end
 
-  def test_it_can_respond_how_many_elements_are_in_correct_positions_when0
+  def test_it_can_respond_how_many_colors_are_in_correct_positions_when0
     #secret code = YGGB
     mastermind = Mastermind.new
     mastermind.secret_code_for_tests(1)
@@ -72,7 +79,7 @@ class MastermindTest < Minitest::Test
     assert_equal 0, mastermind.eval_spot(input)
   end
 
-  def test_it_can_respond_how_many_elements_are_in_all_correct_positions
+  def test_it_can_respond_how_many_colors_are_in_all_correct_positions
     #secret code = YGGB
     mastermind = Mastermind.new
     mastermind.secret_code_for_tests(1)
@@ -80,7 +87,7 @@ class MastermindTest < Minitest::Test
     assert_equal 4, mastermind.eval_spot(input)
   end
 
-  def test_it_can_receive_input_with_not_enough_character
+  def test_it_can_receive_input_with_not_enough_characters
     mastermind = Mastermind.new
     input = "YYG"
     result = mastermind.input_parser(input)
@@ -131,6 +138,7 @@ class MastermindTest < Minitest::Test
   end
 
   def test_it_can_stamp_a_start_time
+    skip
     # secret code is YGGB
     mastermind = Mastermind.new
     mastermind.secret_code_for_tests(1)
@@ -154,11 +162,10 @@ end
 class PrinterTest < Minitest::Test
 
 def test_it_has_the_expected_messages
-  expected = [:greeting, :main_menu, :play_intro]
+  expected = [:greeting, :main_menu, :play_intro, :instructions, :goodbye, :error_message]
 
-  printer = Printer.new
   expected.each do |message|
-    assert printer.respond_to?(message), "Printer should have a #{message} method"
+    assert Printer.respond_to?(message), "Printer should have a #{message} method"
   end
 end
 

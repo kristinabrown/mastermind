@@ -1,22 +1,22 @@
 require_relative 'mastermind'
 require_relative 'printer'
 
-printer = Printer.new
 
-printer.greeting
+
+Printer.greeting
 
 exit_game = false
 
 until exit_game == true
 
   main_menu = false
-  printer.main_menu
+  Printer.main_menu
   input = gets.chomp
 
   until main_menu == true
 
     if input == 'p' || input == 'play'
-      printer.play_intro
+      Printer.play_intro
       mastermind = Mastermind.new
       mastermind.secret_code
 
@@ -28,22 +28,22 @@ until exit_game == true
             response = mastermind.input_parser(input)
             puts response.message
           end
-          printer.goodbye
+          Printer.goodbye
           response.status
           main_menu = true
           exit_game = true
 
     elsif input == 'i' || input == 'instructions'
-      printer.instructions
+      Printer.instructions
       main_menu = true
 
     elsif input == 'q' || input == 'quit'
-      printer.goodbye
+      Printer.goodbye
       main_menu = true
       exit_game = true
 
     else
-      printer.error_message
+      Printer.error_message
       main_menu = true
     end
   end
