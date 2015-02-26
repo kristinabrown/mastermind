@@ -161,12 +161,12 @@ end
 
 class PrinterTest < Minitest::Test
 
-def test_it_has_the_expected_messages
-  expected = [:greeting, :main_menu, :play_intro, :instructions, :goodbye, :error_message]
+  def test_it_has_the_expected_messages
+    expected = [:greeting, :main_menu, :play_intro, :instructions, :goodbye, :error_message]
 
-  expected.each do |message|
-    assert Printer.respond_to?(message), "Printer should have a #{message} method"
+    expected.each do |message|
+      assert Printer.respond_to?(message), "Printer should have a #{message} method"
+    end
   end
-end
 
 end

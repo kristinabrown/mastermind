@@ -1,12 +1,29 @@
+require 'colorize'
 require_relative 'mastermind'
+
 module Printer
 
   def self.greeting
-    puts "Welcome to Mastermind"
+
+    print "\e[2J\e[f"
+    puts "Welcome to"
+    puts'  ______  ___             _____                       _____       _________'.colorize(:red)
+    puts'  ___   |/  /_____ _________  /___________________ ______(_)____________  /'.colorize(:blue)
+    puts'  __  /|_/ /_  __ `/_  ___/  __/  _ \_  ___/_  __ `__ \_  /__  __ \  __  / '.colorize(:yellow)
+    puts'  _  /  / / / /_/ /_(__  )/ /_ /  __/  /   _  / / / / /  / _  / / / /_/ /  '.colorize(:green)
+    puts'  /_/  /_/  \__,_/ /____/ \__/ \___//_/    /_/ /_/ /_//_/  /_/ /_/\__,_/   '.colorize(:magenta)
+
+    puts "\n"
+    puts "\n"
+    puts "\n"
   end
 
   def self.main_menu
     puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
+  end
+
+  def self.menu_after_win
+    "Do you want to (p)lay again or (q)uit?"
   end
 
   def self.play_intro

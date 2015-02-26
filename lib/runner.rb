@@ -1,6 +1,6 @@
+require 'colorize'
 require_relative 'mastermind'
 require_relative 'printer'
-
 
 
 Printer.greeting
@@ -14,6 +14,7 @@ until exit_game == true
   input = gets.chomp
 
   until main_menu == true
+
 
     if input == 'p' || input == 'play'
       Printer.play_intro
@@ -32,6 +33,7 @@ until exit_game == true
           response.status
           main_menu = true
           exit_game = true
+
 
     elsif input == 'i' || input == 'instructions'
       Printer.instructions

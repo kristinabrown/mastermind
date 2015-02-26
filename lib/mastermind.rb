@@ -80,8 +80,12 @@ class Mastermind
   def input_parser(input)
     if input == "c" || input == "cheat"
       Response.new(:message => "The secret code is #{@secret}", :status => :continue)
-    elsif input.size != 4
-      Response.new(:message => "you must enter 4 letters", :status => :continue)
+    elsif input == "q" || input == "quit"
+      Response.new(:message => "See ya!", :status => :won)
+    elsif input.size < 4
+      Response.new(:message => "Your guess is too short! You must enter 4 letters.", :status => :continue)
+    elsif input.size > 4
+      Response.new(:message => "Your guess is too long! You must enter 4 letters.", :status => :continue)
     else
       input.upcase!
       execute(input)
