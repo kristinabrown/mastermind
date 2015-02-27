@@ -1,7 +1,6 @@
 require_relative 'printer'
-require_relative 'mastermind_logic'
-
-
+require_relative 'game_play'
+#require_relative 'mastermind'
 
 module Parser
 
@@ -10,7 +9,6 @@ module Parser
       Printer.cheater(secret)
     elsif input == "q" || input == "quit"
       Printer.goodbye
-      @main_menu = true
       @exit_game = true
     elsif input.size < 4
       Printer.guess_too_short
@@ -18,7 +16,7 @@ module Parser
       Printer.guess_too_long
     else
       input.upcase!
-      MastermindLogic.new.execute(input, secret)
+      GamePlay.new.execute(input, secret)
     end
   end
 

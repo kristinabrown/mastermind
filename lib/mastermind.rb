@@ -1,57 +1,70 @@
 #!/usr/bin/env ruby
 
 require 'colorize'
-require_relative 'mastermind_logic'
+require_relative 'game_play'
 require_relative 'printer'
 require_relative 'parser'
 
 
 
-Printer.greeting
+class Runner
 
-@exit_game = false
+  def initialize
+    @exit_game = false
+    @exit_menu = false
+  end
 
-until @exit_game == true
-
-  @main_menu = false
-  Printer.main_menu
-  input = gets.chomp
-
-  until @main_menu == true
-
-    #case response.status
-
-    if input == 'p' || input == 'play'
+  def main_menu_options(input)
+    case
+    when play?(input)
       Printer.play_intro
-      mastermind = MastermindLogic.new
-      @won = false
-      secret = mastermind.secret_code
+      game = GamePlay.new
+      secret = game.secret_code
+      game.game_loop(secret)
 
-          response = nil
-
-          until @won == true
-            print "> "
-            input = gets.chomp
-            puts Parser.input_parser(input, secret)
-          end
-          Printer.goodbye
-
-          @main_menu = true
-          @exit_game = true
-
-
-    elsif input == 'i' || input == 'instructions'
+    when instructions?(input)
       Printer.instructions
-      @main_menu = true
+      main_menu_options(input)
 
-    elsif input == 'q' || input == 'quit'
+    when quit?(input)
       Printer.goodbye
-      @main_menu = true
       @exit_game = true
 
     else
       Printer.error_message
-      @main_menu = true
+      main_menu_options(input)
     end
   end
+
+  def winner_menu
+    Printer.menu_after_win
+    input = gets.chomp
+    main_menu_options(input)
+  end
+
+  def play?(input)
+    input == "p" || input == "play"
+  end
+
+  def instructions?(input)
+    input == "i" || input == "instructions"
+  end
+
+  def quit?(input)
+    input == 'q' || input == 'quit'
+  end
+
+end
+
+
+Printer.greeting
+
+
+until @exit_game == true
+
+  Printer.main_menu
+  input = gets.chomp
+  runner = Runner.new
+  runner.main_menu_options(input)
+
 end

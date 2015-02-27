@@ -25,7 +25,7 @@ module Printer
   end
 
   def self.menu_after_win
-    "Do you want to (p)lay again or (q)uit?"
+    puts "Do you want to (p)lay again or (q)uit?"
   end
 
   def self.play_intro
@@ -54,20 +54,19 @@ correct position. Good Luck!"
   end
 
   def self.evaluator_message(input, spot_count, char_count, turn_count)
-    "#{input} has #{char_count} of the correct colors, with #{spot_count} in the correct position.\nYou've taken #{turn_count} guess(es)"
+    puts "#{input} has #{char_count} of the correct colors, with #{spot_count} in the correct position.\nYou've taken #{turn_count} guess(es)"
   end
 
   def self.cheater(secret)
-    "The secret code is #{secret}"
+    puts "The secret code is #{secret}"
   end
 
   def self.guess_too_short
-    "Your guess is too short! You must enter 4 letters."
+    puts "Your guess is too short! You must enter 4 letters."
   end
 
   def self.guess_too_long
-    "Your guess is too long! You must enter 4 letters."
+    puts "Your guess is too long! You must enter 4 letters."
   end
-
 
 end
