@@ -1,7 +1,9 @@
 require 'colorize'
-require_relative 'mastermind'
+require_relative 'mastermind_logic'
 
 module Printer
+
+  #intro game
 
   def self.greeting
 
@@ -45,6 +47,26 @@ correct position. Good Luck!"
 
   def self.error_message
     puts "please enter 'p' to play, 'q' to quit, or 'i' for instructions"
+  end
+
+  def self.winner(secret, min, sec, turn_count)
+    puts "You win! You guessed the sequence '#{secret}' in #{turn_count} guesses, in #{min} minute(s) and #{sec} seconds. "
+  end
+
+  def self.evaluator_message(input, spot_count, char_count, turn_count)
+    "#{input} has #{char_count} of the correct colors, with #{spot_count} in the correct position.\nYou've taken #{turn_count} guess(es)"
+  end
+
+  def self.cheater(secret)
+    "The secret code is #{secret}"
+  end
+
+  def self.guess_too_short
+    "Your guess is too short! You must enter 4 letters."
+  end
+
+  def self.guess_too_long
+    "Your guess is too long! You must enter 4 letters."
   end
 
 
