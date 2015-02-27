@@ -1,45 +1,47 @@
-#!/usr/bin/env ruby
-
-require 'colorize'
 require_relative 'game_play'
 require_relative 'printer'
 require_relative 'parser'
 
-
-
 class Runner
 
-  def initialize
-    @exit_game = false
-    @exit_menu = false
+  def the_game
+    Printer.main_menu
+
+    until @exit_game == true
+      input = gets.chomp
+
+       if quit?(input)
+         Printer.seeya
+         @exit_game = true
+       else
+         main_menu_options(input)
+       end
+
+    end
   end
 
   def main_menu_options(input)
     case
     when play?(input)
+      new_game = GamePlay.new
       Printer.play_intro
-      game = GamePlay.new
-      secret = game.secret_code
-      game.game_loop(secret)
+      secret = new_game.secret_code
+      new_game.game_loop(secret)
 
     when instructions?(input)
       Printer.instructions
-      main_menu_options(input)
-
-    when quit?(input)
-      Printer.goodbye
-      @exit_game = true
+      the_game
 
     else
       Printer.error_message
-      main_menu_options(input)
+      the_game
     end
   end
 
   def winner_menu
     Printer.menu_after_win
     input = gets.chomp
-    main_menu_options(input)
+    the_game
   end
 
   def play?(input)
@@ -53,18 +55,5 @@ class Runner
   def quit?(input)
     input == 'q' || input == 'quit'
   end
-
-end
-
-
-Printer.greeting
-
-
-until @exit_game == true
-
-  Printer.main_menu
-  input = gets.chomp
-  runner = Runner.new
-  runner.main_menu_options(input)
 
 end

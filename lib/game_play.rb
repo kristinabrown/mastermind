@@ -1,7 +1,8 @@
 require_relative 'mastermind_logic'
 require_relative 'printer'
 require_relative 'parser'
-#require_relative 'mastermind'
+require_relative 'runner'
+
 
 class GamePlay
 
@@ -28,8 +29,22 @@ class GamePlay
     until @won == true
       print ">"
       input = gets.chomp
-      Parser.input_parser(input, secret)
+      if quit?(input)
+        Printer.goodbye
+        break
+      else
+        #own method
+        parsed_input = Parser.new.input_parser(input, secret)
+        if
+          parsed_input.size == 4
+          execute(parsed_input, secret)
+        end
+      end
     end
+  end
+
+  def quit?(input)
+    input == "q" || input == "quit"
   end
 
   def execute(input, secret)
@@ -37,8 +52,8 @@ class GamePlay
     if input == secret
       winner_sequence
       Printer.winner(secret, @min, @sec, @turn_count)
+      @won = true
       Runner.new.winner_menu
-      @won == true
     else
       non_winner_sequence(input, secret)
       Printer.evaluator_message(input, @spot_count, @char_count, @turn_count)
@@ -65,7 +80,7 @@ class GamePlay
   def total_time_equation
     total_time = @end_time - @start_time
     @min = (total_time / 60).to_i
-    @sec = (total_time % 60).to_s[0..2]
+    @sec = (total_time % 60).to_s[0..1]
   end
 
 

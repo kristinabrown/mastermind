@@ -2,14 +2,6 @@ require_relative 'game_play'
 
 class MastermindLogic
 
-  def secret_code_for_tests(x)
-    if x == 1
-      secret = "YGGB"
-    else
-      secret = "YYYY"
-    end
-  end
-
   def hasher_method(string)
     string.chars.group_by do |char|
       char

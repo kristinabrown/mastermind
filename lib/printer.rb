@@ -3,7 +3,6 @@ require_relative 'mastermind_logic'
 
 module Printer
 
-  #intro game
 
   def self.greeting
 
@@ -42,7 +41,11 @@ correct position. Good Luck!"
   end
 
   def self.goodbye
-    puts "Come back any time!"
+    puts "Come back any time!('q' one more time)"
+  end
+
+  def self.seeya
+    puts "See ya!"
   end
 
   def self.error_message
