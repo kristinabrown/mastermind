@@ -1,9 +1,7 @@
 require_relative 'printer'
 require_relative 'game_play'
-require_relative 'runner'
 
 class Parser
-  #pull methods out
 
   def input_parser(input, secret)
     if cheat?(input)

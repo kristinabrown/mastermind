@@ -1,12 +1,12 @@
 require 'colorize'
-require_relative 'mastermind_logic'
+require 'cheerio'
 
 module Printer
-
 
   def self.greeting
 
     print "\e[2J\e[f"
+    puts Cheerio.hello
     puts "Welcome to"
     puts'  ______  ___             _____                       _____       _________'.colorize(:red)
     puts'  ___   |/  /_____ _________  /___________________ ______(_)____________  /'.colorize(:blue)
@@ -41,7 +41,8 @@ correct position. Good Luck!"
   end
 
   def self.goodbye
-    puts "Come back any time!('q' one more time)"
+    puts Cheerio.goodbye
+    puts "('q' one more time)"
   end
 
   def self.seeya

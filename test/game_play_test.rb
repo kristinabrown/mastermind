@@ -1,14 +1,13 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/game_play'
-require './lib/mastermind_logic'
 
 class GamePlayTest < Minitest::Test
 
 #this doesn't work
-  def setup_suppress_output
-    $stdout = StringIO.new
-  end
+  # def setup_suppress_output
+  #   $stdout = StringIO.new
+  # end
 
   def test_initialize
   end
@@ -52,14 +51,14 @@ class GamePlayTest < Minitest::Test
     assert_respond_to mastermind, :end_time
   end
 
-  def test_when_entering_game_loop_input_gets_executed
-    mastermind = GamePlay.new
-    secret = "YYYY"
-    input = "YBYB"
-    result = mastermind.game_loop(secret)
-
-    assert reult.include?(Printer.evaluator_message(input, spot_count, char_count, turn_count))
-  end
+  # def test_when_entering_game_loop_input_gets_executed
+  #   mastermind = GamePlay.new
+  #   secret = "YYYY"
+  #   input = "YBYB"
+  #   result = mastermind.game_loop(secret)
+  #
+  #   assert result.include?(" of the correct colors, ")
+  # end
 
   def test_winner_sequence
   end

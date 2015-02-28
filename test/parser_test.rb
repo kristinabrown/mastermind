@@ -6,10 +6,10 @@ require './lib/printer'
 class ResponseTest < Minitest::Test
 
   def test_it_can_receive_input_with_not_enough_characters
-    skip
+    parser = Parser.new
     secret = "RRRR"
     input = "YYG"
-    result = Parser.input_parser(input, secret)
+    result = parser.input_parser(input, secret)
 
     assert result.include?("Your guess is too short!")
   end
