@@ -33,18 +33,20 @@ class GamePlay
         Printer.goodbye
         break
       else
-        #own method
-        parsed_input = Parser.new.input_parser(input, secret)
-        if
-          parsed_input.size == 4
-          execute(parsed_input, secret)
-        end
+        parse_and_execute(input, secret)
       end
     end
   end
 
   def quit?(input)
     input == "q" || input == "quit"
+  end
+
+  def parse_and_execute(input, secret)
+    parsed_input = Parser.new.input_parser(input, secret)
+    if parsed_input.size == 4
+      execute(parsed_input, secret)
+    end
   end
 
   def execute(input, secret)
@@ -81,6 +83,12 @@ class GamePlay
     total_time = @end_time - @start_time
     @min = (total_time / 60).to_i
     @sec = (total_time % 60).to_s[0..1]
+    @min
+  end
+
+  def test_times
+    @start_time = Time.new(2015, 02, 28, 07, 41, 03)
+    @end_time = Time.new(2015, 02, 28, 07, 58, 43)
   end
 
 

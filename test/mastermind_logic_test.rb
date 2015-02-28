@@ -1,21 +1,12 @@
-require 'minitest/autorun'
-require 'minitest/pride'
+require_relative 'test_helper'
 require './lib/mastermind_logic'
 require './lib/printer'
 
 
 class MastermindLogicTest < Minitest::Test
-  
+
   def test_it_exists
     assert MastermindLogicTest
-  end
-
-  def test_can_break_up_the_input_in_a_hash_based_on_color
-    skip
-    mastermind = MastermindLogic.new
-    input = "YYGR"
-
-    assert.equal "YYGR", mastermind.hasher_method(input)
   end
 
   def test_it_can_respond_how_many_of_the_colors_are_correct

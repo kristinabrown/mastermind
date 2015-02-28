@@ -1,15 +1,20 @@
-require 'minitest/autorun'
-require 'minitest/pride'
+require_relative 'test_helper'
 require './lib/game_play'
 
 class GamePlayTest < Minitest::Test
 
-#this doesn't work
-  # def setup_suppress_output
-  #   $stdout = StringIO.new
-  # end
+  # you have to push 'q' three times to run through this test entirely
 
-  def test_initialize
+  def test_when_a_game_starts_it_has_0turns
+    mastermind = GamePlay.new
+
+    assert_equal 0, mastermind.turn_count
+  end
+
+  def test_when_a_game_starts_won_is_not_true
+    mastermind = GamePlay.new
+
+    assert_equal false, mastermind.won
   end
 
   def test_it_can_respond_to
@@ -27,6 +32,7 @@ class GamePlayTest < Minitest::Test
 
   def test_it_can_count_how_many_turns_youve_taken
     mastermind = GamePlay.new
+    $stdout = StringIO.new
     input = "yggy"
     secret = "ybbb"
 
@@ -41,29 +47,44 @@ class GamePlayTest < Minitest::Test
 
     assert_respond_to mastermind, :start_time
   end
-
+# this passes when the file is ran by itslef but fails when ran through rake test
   def test_it_can_stamp_an_end_time
     mastermind = GamePlay.new
-    input = "YYYY"
+    $stdout = StringIO.new
+    input1 = "YBYB"
+    input2 = "YYYY"
     secret = "YYYY"
+    mastermind.execute(input1, secret)
+    mastermind.execute(input2, secret)
 
-    mastermind.execute(input, secret)
     assert_respond_to mastermind, :end_time
   end
 
-  # def test_when_entering_game_loop_input_gets_executed
-  #   mastermind = GamePlay.new
-  #   secret = "YYYY"
-  #   input = "YBYB"
-  #   result = mastermind.game_loop(secret)
-  #
-  #   assert result.include?(" of the correct colors, ")
-  # end
+  def test_it_can_compute_the_total_time
+    #test time 17 min 40 secdonds
+    mastermind = GamePlay.new
+    $stdout = StringIO.new
+    mastermind.test_times
 
-  def test_winner_sequence
+    assert_equal 17, mastermind.total_time_equation
   end
 
-  def test_non_winner_sequence
+  def test_player_can_quit_while_in_game
+    game = GamePlay.new
+    input = "q"
+
+    assert_equal true, game.quit?(input)
+  end
+
+  def test_it_can_distinguish_q_in_game_loop
+    game = GamePlay.new
+    $stdout = StringIO.new
+    secret = "YYYY"
+    game.game_loop(secret) do
+      game.stub @input, "ybyb"
+    end
+
+    assert_equal false, game.quit?(@input)
   end
 
 end

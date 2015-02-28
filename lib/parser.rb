@@ -15,6 +15,7 @@ class Parser
       input
     else
       input.upcase!
+      input
     end
   end
 

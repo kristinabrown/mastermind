@@ -27,6 +27,11 @@ module Printer
     puts "Do you want to (p)lay again or (q)uit?"
   end
 
+  def self.goodbye_after_win
+    puts "Thanks for playing!"
+    puts "('q' one more time)"
+  end
+
   def self.play_intro
     puts "I have generated a beginner sequence with four elements made up of: (r)ed,
 (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.
@@ -34,8 +39,8 @@ What's your guess?"
   end
 
   def self.instructions
-    puts "When you start a game a random 4-character-combination of (R)ed, (G)reen,
-(B)lue, and (Yellow) is created (ex. RRYB). You have to guess the sequence. With
+    puts "When you start a game of Mastermind a random 4-character-combination of (R)ed, (G)reen,
+(B)lue, and (Y)ellowis created (ex. RRYB). You have to guess the sequence. With
 each guess you will be told how many colors are correct, and how many are in the
 correct position. Good Luck!"
   end
@@ -46,7 +51,7 @@ correct position. Good Luck!"
   end
 
   def self.seeya
-    puts "See ya!"
+    puts Cheerio.goodbye
   end
 
   def self.error_message
@@ -62,7 +67,7 @@ correct position. Good Luck!"
   end
 
   def self.cheater(secret)
-    puts "The secret code is #{secret}"
+     puts "The secret code is #{secret}"
   end
 
   def self.guess_too_short
@@ -70,7 +75,7 @@ correct position. Good Luck!"
   end
 
   def self.guess_too_long
-    puts "Your guess is too long! You must enter 4 letters."
+     puts "Your guess is too long! You must enter 4 letters."
   end
 
 end

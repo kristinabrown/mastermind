@@ -1,62 +1,77 @@
-require 'minitest/autorun'
-require 'minitest/pride'
+require_relative 'test_helper'
 require './lib/parser'
-require './lib/printer'
 
 class ResponseTest < Minitest::Test
 
-  def test_it_can_receive_input_with_not_enough_characters
+
+  def test_it_can_distinguish_if_c
     parser = Parser.new
-    secret = "RRRR"
-    input = "YYG"
+    input = "c"
+
+    assert_equal true, parser.cheat?(input)
+  end
+
+  def test_it_can_distinguish_if_cheat
+    parser = Parser.new
+    input = "cheat"
+
+    assert_equal true, parser.cheat?(input)
+  end
+
+  def test_it_can_distinguish_too_short_of_input
+    parser= Parser.new
+    input = "yyy"
+
+    assert_equal true, parser.too_short?(input)
+  end
+
+  def test_it_can_distinguish_too_long
+    parser = Parser.new
+    input = "yyyyyy"
+
+    assert_equal true, parser.too_long?(input)
+  end
+
+  def test_it_can_distinguish_if_c_through_main_parser
+    parser = Parser.new
+    $stdout = StringIO.new
+    input = "c"
+    secret = "YYYY"
     result = parser.input_parser(input, secret)
 
-    assert result.include?("Your guess is too short!")
+
+    assert_equal true, parser.cheat?(result)
   end
 
-  def test_it_can_recieve_input_with_too_many_characters
-    skip
-    secret = "RRRR"
-    input = "YYGRR"
-    result = Parser.input_parser(input, secret)
+  def test_it_can_distinguish_if_too_long_through_main_parser
+    parser = Parser.new
+    $stdout = StringIO.new
+    input = "YYYYYYYY"
+    secret = "YYYY"
+    result = parser.input_parser(input, secret)
 
-    assert result.include?("Your guess it too long!")
+
+    assert_equal true, parser.too_long?(result)
   end
 
-  def test_it_can_understand_downcase_characters
-    skip
-    mastermind = MastermindLogic.new
-    input = "yygg"
-    result = mastermind.input_parser(input)
-    assert result.message.include?("YYGG")
+  def test_it_can_distinguish_if_too_short_through_main_parser
+    parser = Parser.new
+    $stdout = StringIO.new
+    input = "YY"
+    secret = "YYYY"
+    result = parser.input_parser(input, secret)
+
+
+    assert_equal true, parser.too_short?(result)
   end
 
-  def test_it_can_print_the_secret_if_cheat
-    skip
-    mastermind = MastermindLogic.new
-    mastermind.secret_code_for_tests
-    input = "cheat"
-    result = mastermind.input_parser(input)
-    assert result.message.include?("the secret code is YGGB")
+  def test_it_can_upcase_the_input
+    parser = Parser.new
+    input = "yybb"
+    secret = "YYYY"
+
+    assert_equal "YYBB", parser.input_parser(input, secret)
   end
 
-  def test_it_can_print_the_secret_if_c
-    skip #no message given?
-    # secret code is YGGB
-    mastermind = MastermindLogic.new
-    mastermind.secret_code_for_tests(1)
-    input = "c"
-    result = mastermind.input_parser(input)
-    assert result.message.include?("the secret code is YGGB")
-  end
-
-  def test_it_can_keep_track_of_the_play_time
-    skip
-    mastermind = MastermindLogic.new
-    mastermind.secret_code_for_tests(1)
-    input = "YGGB"
-    result = mastermind.execute(input)
-    assert result.message.include?("in   minutes and  ")
-  end
 
 end

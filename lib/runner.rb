@@ -21,14 +21,13 @@ class Runner
   end
 
   def main_menu_options(input)
-    case
-    when play?(input)
+    if play?(input)
       new_game = GamePlay.new
       Printer.play_intro
       secret = new_game.secret_code
       new_game.game_loop(secret)
 
-    when instructions?(input)
+    elsif instructions?(input)
       Printer.instructions
       the_game
 
@@ -41,7 +40,14 @@ class Runner
   def winner_menu
     Printer.menu_after_win
     input = gets.chomp
-    the_game
+
+    if quit?(input)
+      Printer.goodbye_after_win
+      @exit_game = true
+    elsif play?(input)
+      main_menu_options(input)
+    end
+    
   end
 
   def play?(input)
