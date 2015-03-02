@@ -1,7 +1,7 @@
 <h1>Mastermind</h1>
 This is a variation of the classic game Mastermind.
 
-<h3>Installtion</h3>
+<h3>Installation</h3>
 
 $ gem install mastermind_kb
 
