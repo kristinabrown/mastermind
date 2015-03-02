@@ -60,13 +60,22 @@ class GamePlayTest < Minitest::Test
     assert_respond_to mastermind, :end_time
   end
 
-  def test_it_can_compute_the_total_time
+  def test_it_can_compute_the_total_min
     #test time 17 min 40 secdonds
     mastermind = GamePlay.new
     $stdout = StringIO.new
     mastermind.test_times
 
-    assert_equal 17, mastermind.total_time_equation
+    assert_equal 17, mastermind.min_time_equation
+  end
+
+  def test_it_can_compute_the_total_sec
+    #test time 17 min 40 secdonds
+    mastermind = GamePlay.new
+    $stdout = StringIO.new
+    mastermind.test_times
+
+    assert_equal 40, mastermind.sec_time_equation
   end
 
   def test_player_can_quit_while_in_game
@@ -75,7 +84,7 @@ class GamePlayTest < Minitest::Test
 
     assert_equal true, game.quit?(input)
   end
-
+  # this passes when the file is ran by itslef but fails when ran through rake test
   def test_it_can_distinguish_q_in_game_loop
     game = GamePlay.new
     $stdout = StringIO.new

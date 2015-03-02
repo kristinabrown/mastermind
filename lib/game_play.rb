@@ -53,6 +53,8 @@ class GamePlay
     @start_time
     if input == secret
       winner_sequence
+      min = min_time_equation
+      sec = sec_time_equation
       Printer.winner(secret, @min, @sec, @turn_count)
       @won = true
       Runner.new.winner_menu
@@ -65,7 +67,8 @@ class GamePlay
   def winner_sequence
     guess_counter
     end_time
-    total_time_equation
+    @min = min_time_equation
+    @sec = sec_time_equation
   end
 
   def non_winner_sequence(input, secret)
@@ -79,11 +82,14 @@ class GamePlay
     @end_time = Time.now
   end
 
-  def total_time_equation
+  def min_time_equation
     total_time = @end_time - @start_time
-    @min = (total_time / 60).to_i
-    @sec = (total_time % 60).to_s[0..1]
-    @min
+    (total_time / 60).to_i
+  end
+
+  def sec_time_equation
+    total_time = @end_time - @start_time
+    (total_time % 60).to_s[0..1].to_i
   end
 
   def test_times

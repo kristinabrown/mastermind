@@ -5,7 +5,7 @@ require './lib/printer'
 class PrinterTest < Minitest::Test
 
   def test_it_has_the_expected_main_menu_messages
-    expected = [:greeting, :main_menu, :menu_after_win, :play_intro, :instructions, :goodbye, :error_message]
+    expected = [:greeting, :main_menu, :menu_after_win, :goodbye_after_win, :play_intro, :instructions, :goodbye, :error_message]
 
     expected.each do |message|
       assert Printer.respond_to?(message), "Printer should have a #{message} method"

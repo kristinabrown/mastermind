@@ -59,7 +59,7 @@ correct position. Good Luck!"
   end
 
   def self.winner(secret, min, sec, turn_count)
-    puts "You win! You guessed the sequence '#{secret}' in #{turn_count} guesses, in #{min} minute(s) and #{sec} seconds. "
+    puts "You win! You guessed the sequence '#{secret}' in #{turn_count} guesses, in #{min} minute(s) and #{sec} seconds. That's pretty good!"
   end
 
   def self.evaluator_message(input, spot_count, char_count, turn_count)

@@ -46,12 +46,12 @@ class RunnerTest < Minitest::Test
     assert_equal true, runner.quit?(input)
   end
 
-  def test_it_can_distinguish_if_i_through_main_menu
+#this passes but it fails during 'rake test'
+  def test_it_can_distinguish_i_through_main_menu
     runner = Runner.new
     $stdout = StringIO.new
     input = "i"
     result = runner.main_menu_options(input)
-
 
     assert_equal false, runner.play?(result)
   end

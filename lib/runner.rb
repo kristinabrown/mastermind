@@ -47,7 +47,6 @@ class Runner
     elsif play?(input)
       main_menu_options(input)
     end
-    
   end
 
   def play?(input)
