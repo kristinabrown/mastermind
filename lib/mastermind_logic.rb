@@ -1,16 +1,13 @@
 require_relative 'game_play'
 
 class MastermindLogic
-
-  def hasher_method(string)
-    string.chars.group_by do |char|
-      char
-    end
+  def hash_by_character(input)
+    input.chars.group_by{ |char| char }
   end
 
   def eval_char(input, secret)
-    input_hash = hasher_method(input)
-    secret_hash = hasher_method(secret)
+    input_hash = hash_by_character(input)
+    secret_hash = hash_by_character(secret)
 
     secret_hash.each.reduce(0) do |sum, (char, occur)|
       input_group = input_hash[char] || []
@@ -19,11 +16,9 @@ class MastermindLogic
   end
 
   def eval_spot(input, secret)
-    input_ary = input.chars
-    like_items = secret.chars.zip(input_ary).select do |element|
-      element[0] == element [1]
+    like_items = secret.chars.zip(input.chars).select do |element|
+      element[0] == element[1]
     end
     like_items.count
   end
-
 end

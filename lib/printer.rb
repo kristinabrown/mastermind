@@ -2,9 +2,7 @@ require 'colorize'
 require 'cheerio'
 
 module Printer
-
   def self.greeting
-
     print "\e[2J\e[f"
     puts Cheerio.hello
     puts "Welcome to"
@@ -17,6 +15,10 @@ module Printer
     puts "\n"
     puts "\n"
     puts "\n"
+  end
+
+  def self.input_prompter
+    print ">"
   end
 
   def self.main_menu
@@ -67,7 +69,7 @@ correct position. Good Luck!"
   end
 
   def self.cheater(secret)
-     puts "The secret code is #{secret}"
+    puts "The secret code is #{secret}"
   end
 
   def self.guess_too_short
@@ -75,7 +77,6 @@ correct position. Good Luck!"
   end
 
   def self.guess_too_long
-     puts "Your guess is too long! You must enter 4 letters."
+    puts "Your guess is too long! You must enter 4 letters."
   end
-
 end

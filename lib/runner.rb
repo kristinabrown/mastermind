@@ -3,20 +3,18 @@ require_relative 'printer'
 require_relative 'parser'
 
 class Runner
-
   def the_game
     Printer.main_menu
 
     until @exit_game == true
       input = gets.chomp
 
-       if quit?(input)
-         Printer.seeya
-         @exit_game = true
-       else
-         main_menu_options(input)
-       end
-
+      if quit?(input)
+        Printer.seeya
+        @exit_game = true
+      else
+        main_menu_options(input)
+      end
     end
   end
 
@@ -26,11 +24,9 @@ class Runner
       Printer.play_intro
       secret = new_game.secret_code
       new_game.game_loop(secret)
-
     elsif instructions?(input)
       Printer.instructions
       the_game
-
     else
       Printer.error_message
       the_game
@@ -60,5 +56,4 @@ class Runner
   def quit?(input)
     input == 'q' || input == 'quit'
   end
-
 end

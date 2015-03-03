@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.email        = "kristina.frey.frey@gmail.com"
   s.homepage     = "https://github.com/kristinabrown/mastermind"
   s.summary      = "The game Mastermind."
-  s.description  = File.read(File.join(File.dirname(__FILE__), 'README'))
+  s.description  = File.read(File.join(File.join(File.dirname(__FILE__),'README'))
   s.licenses     = ['MIT']
 
   s.files         = Dir["{lib,test}/**/*"] + %w(Gemfile README)

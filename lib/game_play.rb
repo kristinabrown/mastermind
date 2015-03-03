@@ -1,17 +1,13 @@
 require_relative 'mastermind_logic'
-require_relative 'printer'
-require_relative 'parser'
 require_relative 'runner'
 
-
 class GamePlay
-
   attr_reader :turn_count, :start_time, :won
 
   def initialize
     @turn_count = 0
     @start_time = Time.now
-    @won = false
+    @won        = false
   end
 
   def secret_code
@@ -27,7 +23,7 @@ class GamePlay
 
   def game_loop(secret)
     until @won == true
-      print ">"
+      Printer.input_prompter
       input = gets.chomp
       if quit?(input)
         Printer.goodbye
@@ -53,8 +49,7 @@ class GamePlay
     @start_time
     if input == secret
       winner_sequence
-      min = min_time_equation
-      sec = sec_time_equation
+
       Printer.winner(secret, @min, @sec, @turn_count)
       @won = true
       Runner.new.winner_menu
@@ -67,8 +62,8 @@ class GamePlay
   def winner_sequence
     guess_counter
     end_time
-    @min = min_time_equation
-    @sec = sec_time_equation
+    @min = calculate_total_min
+    @sec = calculate_total_sec
   end
 
   def non_winner_sequence(input, secret)
@@ -82,20 +77,18 @@ class GamePlay
     @end_time = Time.now
   end
 
-  def min_time_equation
+  def calculate_total_min
     total_time = @end_time - @start_time
     (total_time / 60).to_i
   end
 
-  def sec_time_equation
+  def calculate_total_sec
     total_time = @end_time - @start_time
     (total_time % 60).to_s[0..1].to_i
   end
 
   def test_times
     @start_time = Time.new(2015, 02, 28, 07, 41, 03)
-    @end_time = Time.new(2015, 02, 28, 07, 58, 43)
+    @end_time   = Time.new(2015, 02, 28, 07, 58, 43)
   end
-
-
 end

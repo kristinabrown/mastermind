@@ -3,7 +3,7 @@ require './lib/game_play'
 
 class GamePlayTest < Minitest::Test
 
-  # you have to push 'q' three times to run through this test entirely
+  # you have to push 'q' twice to run through this test entirely
 
   def test_when_a_game_starts_it_has_0turns
     mastermind = GamePlay.new
@@ -66,7 +66,7 @@ class GamePlayTest < Minitest::Test
     $stdout = StringIO.new
     mastermind.test_times
 
-    assert_equal 17, mastermind.min_time_equation
+    assert_equal 17, mastermind.calculate_total_min
   end
 
   def test_it_can_compute_the_total_sec
@@ -75,7 +75,7 @@ class GamePlayTest < Minitest::Test
     $stdout = StringIO.new
     mastermind.test_times
 
-    assert_equal 40, mastermind.sec_time_equation
+    assert_equal 40, mastermind.calculate_total_sec
   end
 
   def test_player_can_quit_while_in_game
@@ -95,5 +95,5 @@ class GamePlayTest < Minitest::Test
 
     assert_equal false, game.quit?(@input)
   end
-
+  
 end

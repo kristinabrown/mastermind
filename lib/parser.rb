@@ -1,16 +1,15 @@
 require_relative 'printer'
-require_relative 'game_play'
 
 class Parser
-
   def input_parser(input, secret)
-    if cheat?(input)
+    case
+    when cheat?(input)
       Printer.cheater(secret)
       input
-    elsif too_short?(input)
+    when too_short?(input)
       Printer.guess_too_short
       input
-    elsif too_long?(input)
+    when too_long?(input)
       Printer.guess_too_long
       input
     else
@@ -30,5 +29,4 @@ class Parser
   def too_long?(input)
     input.size > 4
   end
-
 end
